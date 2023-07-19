@@ -2,7 +2,7 @@
 import { AbstractConnector } from '@web3-react/abstract-connector';
 import { useWeb3React, Web3ReactHooks } from '@web3-react/core';
 import { ethers } from 'ethers';
-import React, {useContext, useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState, Suspense } from 'react';
 
 // External Packages
 import Joyride, { CallBackProps } from 'react-joyride';
@@ -42,9 +42,6 @@ import { walletConnectV2, hooks as walletConnectV2Hooks } from './connectors/wal
 import { MetaMask } from '@web3-react/metamask';
 import { WalletConnect as WalletConnectV2 } from '@web3-react/walletconnect-v2';
 import { Network } from "@web3-react/network";
-
-
-
 
 // Internal Configs
 import { appConfig } from 'config';
@@ -191,72 +188,75 @@ export default function App() {
 
 
   return (
-    <ThemeProvider theme={darkMode ? themeDark : themeLight}>
-      {!isActive && (
-        <SectionV2 minHeight="100vh">
-          <AppLogin toggleDarkMode={toggleDarkMode} />
-        </SectionV2>
-      )}
+    <Suspense fallback={<h1>Loading</h1>}>
+      <ThemeProvider theme={darkMode ? themeDark : themeLight}>
+        {!isActive && (
+          <SectionV2 minHeight="100vh">
+            <AppLogin toggleDarkMode={toggleDarkMode} />
+          </SectionV2>
+        )}
 
-      {isActive && !authError && (
-        <>
-          <GlobalStyle />
-          <InitState />
-          <NavigationContextProvider>
-            <AppContextProvider>
-              <Joyride
-                run={run}
-                steps={steps}
-                continuous={tutorialContinous}
-                stepIndex={stepIndex}
-                // hideFooter={true}
-                // primaryProps={false}
-                hideBackButton={true}
-                hideCloseButton={false}
-                disableScrolling={true}
-                disableScrollParentFix={true}
-                // disableFlip={true}
-                // showNextButton={false}
-                showSkipButton={false}
-                disableOverlayClose={true}
-                callback={handleJoyrideCallback}
-                styles={{
-                  options: {
-                    arrowColor: darkMode ? themeDark.dynamicTutsBg : themeLight.dynamicTutsBg,
-                    backgroundColor: darkMode ? themeDark.dynamicTutsBg : themeLight.dynamicTutsBg,
-                    overlayColor: darkMode ? themeDark.dynamicTutsBgOverlay : themeLight.dynamicTutsBgOverlay,
-                    primaryColor: darkMode ? themeDark.dynamicTutsPrimaryColor : themeLight.dynamicTutsPrimaryColor,
-                    textColor: darkMode ? themeDark.dynamicTutsFontColor : themeLight.dynamicTutsFontColor,
-                    zIndex: 1000,
-                  },
-                }}
-              />
+        {isActive && !authError && (
+          <>
 
-              <HeaderContainer>
-                <Header
-                  isDarkMode={darkMode}
-                  darkModeToggle={toggleDarkMode}
+            <GlobalStyle />
+            <InitState />
+            <NavigationContextProvider>
+              <AppContextProvider>
+                <Joyride
+                  run={run}
+                  steps={steps}
+                  continuous={tutorialContinous}
+                  stepIndex={stepIndex}
+                  // hideFooter={true}
+                  // primaryProps={false}
+                  hideBackButton={true}
+                  hideCloseButton={false}
+                  disableScrolling={true}
+                  disableScrollParentFix={true}
+                  // disableFlip={true}
+                  // showNextButton={false}
+                  showSkipButton={false}
+                  disableOverlayClose={true}
+                  callback={handleJoyrideCallback}
+                  styles={{
+                    options: {
+                      arrowColor: darkMode ? themeDark.dynamicTutsBg : themeLight.dynamicTutsBg,
+                      backgroundColor: darkMode ? themeDark.dynamicTutsBg : themeLight.dynamicTutsBg,
+                      overlayColor: darkMode ? themeDark.dynamicTutsBgOverlay : themeLight.dynamicTutsBgOverlay,
+                      primaryColor: darkMode ? themeDark.dynamicTutsPrimaryColor : themeLight.dynamicTutsPrimaryColor,
+                      textColor: darkMode ? themeDark.dynamicTutsFontColor : themeLight.dynamicTutsFontColor,
+                      zIndex: 1000,
+                    },
+                  }}
                 />
-              </HeaderContainer>
 
-              <ParentContainer
-                bg={darkMode ? themeDark.backgroundBG : !isActive ? themeLight.connectWalletBg : themeLight.backgroundBG}
-                headerHeight={GLOBALS.CONSTANTS.HEADER_HEIGHT}
-              >
-                <LeftBarContainer leftBarWidth={GLOBALS.CONSTANTS.LEFT_BAR_WIDTH}>
-                  <Navigation />
-                </LeftBarContainer>
+                <HeaderContainer>
+                  <Header
+                    isDarkMode={darkMode}
+                    darkModeToggle={toggleDarkMode}
+                  />
+                </HeaderContainer>
 
-                <ContentContainer leftBarWidth={GLOBALS.CONSTANTS.LEFT_BAR_WIDTH}>
-                  {/* Shared among all pages, load universal things here */}
-                  <MasterInterfacePage />
-                </ContentContainer>
-              </ParentContainer>
-            </AppContextProvider>
-          </NavigationContextProvider>
-        </>
-      )}
-    </ThemeProvider>
+                <ParentContainer
+                  bg={darkMode ? themeDark.backgroundBG : !isActive ? themeLight.connectWalletBg : themeLight.backgroundBG}
+                  headerHeight={GLOBALS.CONSTANTS.HEADER_HEIGHT}
+                >
+                  <LeftBarContainer leftBarWidth={GLOBALS.CONSTANTS.LEFT_BAR_WIDTH}>
+                    <Navigation />
+                  </LeftBarContainer>
+
+                  <ContentContainer leftBarWidth={GLOBALS.CONSTANTS.LEFT_BAR_WIDTH}>
+                    {/* Shared among all pages, load universal things here */}
+                    <MasterInterfacePage />
+                  </ContentContainer>
+                </ParentContainer>
+              </AppContextProvider>
+            </NavigationContextProvider>
+          </>
+        )}
+      </ThemeProvider>
+    </Suspense>
   );
 }
 

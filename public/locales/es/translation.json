@@ -1,0 +1,29 @@
+{
+  "app-login": {
+    "title": "Conectar Billetera",
+    "privacy-policy": {
+      "part1": "Al conectar tu billetera, ",
+      "part2": "Aceptas",
+      "part3": "nuestros",
+      "part4": "Términos de Servicio",
+      "part5": "y nuestra",
+      "part6": "Política de Privacidad"
+    },
+    "note": {
+      "part1": "Nota: El protocolo Push ha estado en desarrollo durante 2+ años. Ha completado con éxito sus auditorías de seguridad de los contratos inteligentes de la ",
+      "part2": "versión 1",
+      "part3": "y la ",
+      "part4": "versión 1.5",
+      "part5": "por Chainsafe. Sin embargo, siempre Haga Su Propia Investigación y anticipe errores o mejoras de la interfaz de usuario. Puede utilizar nuestro ",
+      "part6": "Formulario de recompensa por descubrimiento de bugs",
+      "part7": "para reportar errores o comunicarse con nosotros en nuestro ",
+      "part8": "Discord"
+    }
+  },
+  "app": {
+    "inbox-section": {
+      "title": "Bandeja de entrada",
+      "Spam": "Spam"
+    }
+  }
+}

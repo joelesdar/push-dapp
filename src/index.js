@@ -19,7 +19,8 @@ import { VideoCallContextProvider } from './contexts/VideoCallContext';
 import ErrorContextProvider from './contexts/ErrorContext';
 import { connectors } from './App'
 
-
+// Internationalization
+import './i18n';
 
 // Internal Configs
 import * as dotenv from "dotenv";

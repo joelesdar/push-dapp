@@ -1,0 +1,29 @@
+{
+  "app-login": {
+    "title": "Connect a Wallet",
+    "privacy-policy": {
+      "part1": "By connecting your wallet, ",
+      "part2": "You agree",
+      "part3": "to our",
+      "part4": "Terms of Service",
+      "part5": "and our",
+      "part6": "Privacy Policy"
+    },
+    "note": {
+      "part1": "Note: The Push Protocol has been under development for 2+ years now. It has successfully completed its security audits of",
+      "part2": "version 1",
+      "part3": "and",
+      "part4": "version 1.5",
+      "part5": "smart contracts by Chainsafe. However, always DYOR and anticipate UI bugs or improvements. You can use our",
+      "part6": "Bug Bounty Form",
+      "part7": "to report bugs or communicate with us on our",
+      "part8": "Discord"
+    }
+  },
+  "app": {
+    "inbox-section": {
+      "title": "Inbox",
+      "spam": "Spam"
+    }
+  }
+}

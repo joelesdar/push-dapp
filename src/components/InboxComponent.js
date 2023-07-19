@@ -10,10 +10,16 @@ import { Item } from 'primaries/SharedStyling';
 import Feedbox from 'segments/Feedbox';
 import SpamBox from 'segments/spam';
 
+import { useTranslation } from 'react-i18next';
+
 // Internal Configs
 import GLOBALS from 'config/Globals';
 
 const InboxComponent = ({isSpam}) => {
+
+  // Internationalization
+  const { t } = useTranslation();
+
   const [showInbox, setShowInbox] = useState(!isSpam);
   const [showFilter, setShowFilter] = useState(false);
   const [search, setSearch] = useState('');
@@ -35,10 +41,10 @@ const InboxComponent = ({isSpam}) => {
       <NavBoxHolder>
         <NavHolder>
           <NavTitleButton isActive={showInbox} onClick={()=>handleToggle('/inbox')}>
-            Inbox
+            {t('app.inbox-section.title')}
           </NavTitleButton>
           <NavTitleButton isActive={!showInbox} onClick={()=>handleToggle('/spam')}>
-            Spam
+          {t('app.inbox-section.spam')}
           </NavTitleButton>
         </NavHolder>
         <SearchContainer>

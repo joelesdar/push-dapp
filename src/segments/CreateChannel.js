@@ -7,6 +7,7 @@ import React from "react";
 import Dropzone from 'react-dropzone-uploader';
 import 'react-dropzone-uploader/dist/styles.css';
 import styled from "styled-components";
+import { useTranslation } from 'react-i18next';
 
 // Internal Compoonents
 import LoaderSpinner, { LOADER_TYPE } from 'components/reusables/loaders/LoaderSpinner';
@@ -18,6 +19,10 @@ const ipfs = require('ipfs-api')()
 
 // Create Header
 function CreateChannel() {
+
+  // Internationalization
+  const { t } = useTranslation();
+
   const { account, provider } = useWeb3React();
 
   const [processing, setProcessing] = React.useState(false);
@@ -121,7 +126,7 @@ function CreateChannel() {
     <Container>
       <Channel>
         <Notice>
-          <Title>Create your Channel!</Title>
+          <Title>{t('app-login.title')}</Title>
 
           {uploadDone && !processing &&
             <Info>Image Verified! Just fill in your other information and hit <b>Beam me up</b> to create your channel... literal goosebumps!!!</Info>
