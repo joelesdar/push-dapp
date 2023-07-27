@@ -23,6 +23,7 @@ import NavigationButton from 'components/NavigationButton';
 import Bell from 'primaries/Bell';
 import Profile from 'primaries/Profile';
 import { NavigationContext } from 'contexts/NavigationContext';
+import LanguageSwitcher from 'components/LanguageSwitcher';
 
 // Internal Configs
 import { appConfig } from 'config';
@@ -185,6 +186,7 @@ function Header({ isDarkMode, darkModeToggle }) {
           {isActive && !showLoginControls && !error && (
             <RightBarDesktop justify="flex-end" flex="initial">
               <ChainIndicator isDarkMode={isDarkMode}/>
+              <LanguageSwitcher isDarkMode={isDarkMode} />
               <Profile isDarkMode={isDarkMode} />
             </RightBarDesktop>
           )}{' '}

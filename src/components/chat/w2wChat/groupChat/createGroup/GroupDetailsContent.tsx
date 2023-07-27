@@ -5,6 +5,7 @@ import React from 'react';
 import styled, { ThemeProvider, useTheme } from 'styled-components';
 import * as PushAPI from '@pushprotocol/restapi';
 import { MdError } from 'react-icons/md';
+import { useTranslation } from 'react-i18next';
 
 // Internal Components
 import ModalConfirmButton from 'primaries/SharedModalComponents/ModalConfirmButton';
@@ -46,13 +47,17 @@ export const GroupDetailsContent = ({
     {
       id: 1,
       title: 'Public',
+      titleEs: 'Público',
       subTitle: 'Chats are not encrypted',
+      subTitleEs: 'Los chats no están encriptados',
       value: 'public',
     },
     {
       id: 2,
       title: 'Private',
+      titleEs: 'Privado',
       subTitle: 'Chats are encrypted',
+      subTitleEs: 'Los chats están encriptados',
       value: 'private',
     },
   ];
@@ -78,6 +83,7 @@ export const GroupDetailsContent = ({
   };
 
   const handleValidation = async () => {
+
     try {
       const getGroupResponse = await PushAPI.chat.getGroupByName({ groupName: groupNameData, env: appConfig.appEnv });
       if (typeof getGroupResponse !== 'string') {
@@ -134,13 +140,16 @@ export const GroupDetailsContent = ({
     fileUploadInputRef.current.click();
   };
 
+   // Internationalization
+   const { t, i18n } = useTranslation();
+
   return (
     <ThemeProvider theme={themes}>
 
 
       <GroupModalHeader
         handleClose={handleClose}
-        title={"Create Group"}
+        title={t('app.chat-section.create-group-modal.title')}
       />
 
 
@@ -180,7 +189,7 @@ export const GroupDetailsContent = ({
         </GroupIconContainer>
         <TextFieldContainer>
           <TextFieldHeaderContainer>
-            <TextFieldHeading color={themes.modalHeadingColor}>Group Name</TextFieldHeading>
+            <TextFieldHeading color={themes.modalHeadingColor}>{t('app.chat-section.create-group-modal.name-label')}</TextFieldHeading>
             <CharacterCount color={themes.modalSecondaryTextColor}>{50 - groupNameData.length}</CharacterCount>
           </TextFieldHeaderContainer>
           <CustomInput
@@ -194,7 +203,7 @@ export const GroupDetailsContent = ({
         </TextFieldContainer>
         <TextFieldContainer>
           <TextFieldHeaderContainer>
-            <TextFieldHeading color={themes.modalHeadingColor}>Group Description</TextFieldHeading>
+            <TextFieldHeading color={themes.modalHeadingColor}>{t('app.chat-section.create-group-modal.description-label')}</TextFieldHeading>
             <CharacterCount color={themes.modalSecondaryTextColor}>{150 - groupDescriptionData.length}</CharacterCount>
           </TextFieldHeaderContainer>
           <GroupDescription
@@ -207,7 +216,7 @@ export const GroupDetailsContent = ({
           {errorInfo?.description && <ErrorMessage message={errorInfo?.description} />}
         </TextFieldContainer>
         <ItemVV2 alignItems="baseline">
-          <TextFieldHeading color={themes.modalHeadingColor}>Group Type</TextFieldHeading>
+          <TextFieldHeading color={themes.modalHeadingColor}>{t('app.chat-section.create-group-modal.type-label')}</TextFieldHeading>
           <OptionsContainer>
             {options.map((option) => {
               return (
@@ -229,14 +238,14 @@ export const GroupDetailsContent = ({
                     color={themes.modalMessageColor}
                     margin="0px 0px 2px 0px"
                   >
-                    {option.title}
+                    {i18n.language === 'es' ? option.titleEs : option.title}
                   </OptionText>
                   <OptionText
                     fontWeight="400"
                     fontSize="12px"
                     color={themes.modalSecondaryTextColor}
                   >
-                    {option.subTitle}
+                    {i18n.language === 'es' ? option.subTitleEs : option.subTitle}
                   </OptionText>
                 </OptionContainer>
               );
@@ -244,7 +253,7 @@ export const GroupDetailsContent = ({
           </OptionsContainer>
         </ItemVV2>
         <ModalConfirmButton
-          text="Next"
+          text={t('app.chat-section.create-group-modal.next-button')}
           onClick={() => {
             handleNextClick();
           }}

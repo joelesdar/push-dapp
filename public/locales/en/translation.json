@@ -24,6 +24,16 @@
     "inbox-section": {
       "title": "Inbox",
       "spam": "Spam"
+    },
+    "chat-section": {
+      "start-chat-label": "Start a new chat by using the + button",
+      "create-group-modal": {
+        "title": "Create Group",
+        "name-label": "Group Name",
+        "description-label": "Group Description",
+        "type-label": "Group Type",
+        "next-button": "Next"
+      }
     }
   }
 }

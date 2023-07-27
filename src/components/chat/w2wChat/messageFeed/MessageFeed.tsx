@@ -5,6 +5,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { MdError } from 'react-icons/md';
 import styled, { useTheme } from 'styled-components';
 import { Waypoint } from 'react-waypoint';
+import { useTranslation } from 'react-i18next';
 
 // Internal Components
 import { useWeb3React } from '@web3-react/core';
@@ -48,6 +49,8 @@ const MessageFeed = (props: MessageFeedPropsI): JSX.Element => {
   const messageFeedToast = useToast();
 
   const onFeedClick = (feed:Feeds,i:number):void => {
+
+
     if((receivedIntents?.filter((userExist) => userExist.did && props?.filteredUserData[0]?.did && userExist.did?.toLowerCase() === props?.filteredUserData[0]?.did?.toLowerCase()))
 .length)
     {
@@ -219,6 +222,9 @@ const MessageFeed = (props: MessageFeedPropsI): JSX.Element => {
     return Number(index) === feeds?.length - 1 && !messagesLoading && !bgUpdateLoading;
   };
 
+  // Internationalization
+  const { t } = useTranslation();
+
   return (
     <ItemVV2
       flex={6}
@@ -246,7 +252,7 @@ const MessageFeed = (props: MessageFeedPropsI): JSX.Element => {
           <>
             {!feeds?.length && !messagesLoading && activeTab!==3 && activeTab!==4 ? (
               <EmptyConnection>
-                Start a new chat by using the + button <ArrowBend src="/svg/chats/arrowbendup.svg" />
+                {t('app.chat-section.start-chat-label')} <ArrowBend src="/svg/chats/arrowbendup.svg" />
               </EmptyConnection>
             ) : (
               feeds.map((feed: Feeds, i) => (
